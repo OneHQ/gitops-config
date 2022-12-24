@@ -1,0 +1,50 @@
+syncPolicy:
+  # automated:
+  #   prune: true
+  #   selfHeal: true
+  syncOptions:
+  - ApplyOutOfSyncOnly=true
+
+vaultConfig:
+  destination:
+    name: hub
+    namespace: vault
+  config:
+    jwtClusterIssuer: https://oidc-issuer.apps.okd-1.internal.example.com
+    vaultAddress: https://vault.apps.okd-1.internal.example.com
+
+    jwtAuthBackendRoles:
+      - name: "{{ .Release.Name }}-sso"
+        spec:
+          auth:
+            address: "{{ .Values.vaultConfig.config.vaultAddress }}"
+            path: jwt
+            role: vault-operator
+            serviceAccount: vault-operator
+          backend: jwt
+          roleType: jwt
+          userClaim: sub
+          boundAudiences:
+            - "{{ .Values.vaultConfig.config.jwtClusterIssuer }}"
+          boundSubject: "system:serviceaccount:{{ .Release.Name }}:{{ .Release.Name }}-ssp"
+          tokenPolicies:
+            - slack-read
+
+      - name: "{{ .Release.Name }}-admin"
+        spec:
+          auth:
+            address: "{{ .Values.vaultConfig.config.vaultAddress }}"
+            path: jwt
+            role: vault-operator
+            serviceAccount: vault-operator
+          boundAudiences:
+            - "{{ .Values.vaultConfig.config.jwtClusterIssuer }}"
+          backend: jwt
+          roleType: jwt
+          userClaim: sub
+          boundSubject: system:serviceaccount:{{ .Release.Name }}:{{ .Release.Name }}-admin
+          tokenPolicies:
+            - geocode-read
+
+ciRBAC:
+  create: true

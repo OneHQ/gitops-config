@@ -12,7 +12,7 @@ spec:
 
     helm:
       values: |- 
-        {{ toYaml .Values.vaultConfig.config | indent 8 }}
+        {{ tpl (toYaml .Values.vaultConfig.config) . | nindent 8 }}
         
 
   destination: {{ toYaml .Values.vaultConfig.destination | nindent 4}}
