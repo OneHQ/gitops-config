@@ -6,19 +6,19 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
   name: {{ .Release.Name }}-cd
 ---
-{{- if .Values.ciRBAC.create }}
+{{- if .Values.ciPipelineRBAC.create }}
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ .Release.Name }}-ci
-  namespace: {{ .Values.mainApp.cdNamespace }}
+  name: {{ .Release.Name }}-ci-pipeline
+  namespace: {{ .Release.Name }}-cd
   labels:
     {{- include "cd-preconfig.labels" . | nindent 4 }}
 
 subjects:
   - kind: ServiceAccount
-    name: {{ .Values.ciRBAC.saName }}
-    namespace: {{ .Values.ciRBAC.saNamespace }}
+    name: {{ .Release.Name }}-ci-pipeline
+    namespace: {{ .Release.Name }}-ci-pipeline
 
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -28,7 +28,8 @@ roleRef:
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ .Release.Name }}-ci
+  name: {{ .Release.Name }}-ci-pipeline
+  namespace: {{ .Release.Name }}-cd
   labels:
     {{- include "cd-preconfig.labels" . | nindent 4 }}
 rules:
