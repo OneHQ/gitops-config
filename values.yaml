@@ -9,6 +9,8 @@ syncPolicy:
 mainApp:
   destinations:
    - name: hub
+     namespace: ""
+
 
 vaultConfig:
   destination:

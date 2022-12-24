@@ -1,4 +1,5 @@
 # TODO: to be replaced by NamespaceRequest
+{{- if .Values.ciPipelineRBAC.create }}
 kind: Namespace
 apiVersion: v1
 metadata:
@@ -6,7 +7,6 @@ metadata:
     argocd.argoproj.io/sync-wave: "-1"
   name: {{ .Values.instanceName }}-cd
 ---
-{{- if .Values.ciPipelineRBAC.create }}
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
