@@ -16,7 +16,7 @@ spec:
   # Only permit applications to deploy to the guestbook namespace in the same cluster
   destinations:
     {{- range .Values.mainApp.destinations }}
-    - namespace: '{{ .namespace }}'
+    - namespace: '{{ $.Values.instanceName }}'
       name: '{{ .name }}'
     {{- end }}
 
