@@ -12,7 +12,7 @@ spec:
   # Project description
   description: {{ .Values.instanceName }}-mainapp
   sourceNamespaces:
-    - '{{ .Values.instanceName }}-cd'
+    - '{{ .Values.instanceName }}'
 
 
   # Only permit applications to deploy to the guestbook namespace in the same cluster

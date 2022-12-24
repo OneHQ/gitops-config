@@ -1,17 +1,18 @@
 # TODO: to be replaced by NamespaceRequest
-{{- if .Values.ciPipelineRBAC.create }}
+
 kind: Namespace
 apiVersion: v1
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
-  name: {{ .Values.instanceName }}-cd
+  name: {{ .Values.instanceName }}
 ---
+{{- if .Values.ciPipelineRBAC.create }}
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ .Values.instanceName }}-ci-pipeline
-  namespace: {{ .Values.instanceName }}-cd
+  namespace: {{ .Values.instanceName }}
   labels:
     {{- include "cd-preconfig.labels" . | nindent 4 }}
 
@@ -29,7 +30,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ .Values.instanceName }}-ci-pipeline
-  namespace: {{ .Values.instanceName }}-cd
+  namespace: {{ .Values.instanceName }}
   labels:
     {{- include "cd-preconfig.labels" . | nindent 4 }}
 rules:

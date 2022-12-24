@@ -1,8 +1,8 @@
 # TODO: to be replaced by NamespaceRequest
-kind: Namespace
-apiVersion: v1
-metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "-2"
-  name: {{ .Values.instanceName }}
+# kind: Namespace
+# apiVersion: v1
+# metadata:
+#   annotations:
+#     argocd.argoproj.io/sync-wave: "-2"
+#   name: {{ .Values.instanceName }}
 ---
