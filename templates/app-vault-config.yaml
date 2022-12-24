@@ -2,12 +2,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Release.Name }}-vault-config
+  name: {{ .Values.instanceName }}-vault-config
   labels: {{- include "cd-preconfig.labels" . | nindent 4 }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: {{ .Release.Name }}-vault-config
+  project: {{ .Values.instanceName }}-vault-config
   source: {{ toYaml .Values.vaultConfig.repository | nindent 4 }}
 
     helm:

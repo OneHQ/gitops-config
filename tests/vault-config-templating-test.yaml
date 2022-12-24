@@ -4,7 +4,7 @@ syncPolicy:
   #   selfHeal: true
   syncOptions:
   - ApplyOutOfSyncOnly=true
-
+instanceName: mimosan
 vaultConfig:
   destination:
     name: hub

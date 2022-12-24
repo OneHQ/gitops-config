@@ -1,3 +1,4 @@
+instanceName: ""
 syncPolicy:
   automated:
     prune: true
