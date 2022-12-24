@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ .Release.Name }}-mainapp
+  labels: {{- include "cd-preconfig.labels" . | nindent 4 }} 
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # Project description
+  description: {{ .Release.Name }}-mainapp
+  sourceNamespaces:
+    - '{{ .Release.Name }}-cd'
+
+
+  # Only permit applications to deploy to the guestbook namespace in the same cluster
+  destinations:
+    {{- range .Values.mainApp.destinations }}
+    - namespace: '{{ $.Release.Name }}'
+      name: '{{ .name }}'
+    {{- end }}
+
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+
+  # Enables namespace orphaned resource monitoring.
+  orphanedResources:
+    warn: true
+

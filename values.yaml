@@ -5,6 +5,9 @@ syncPolicy:
   syncOptions:
   - ApplyOutOfSyncOnly=true
 
+mainApp:
+  destinations:
+   - name: hub
 
 vaultConfig:
   destination:

@@ -8,7 +8,7 @@ metadata:
     - resources-finalizer.argocd.argoproj.io
 spec:
   # Project description
-  description: {{ .Release.Name }}
+  description: {{ .Release.Name }}-vault-config
 
   # Allow manifests to deploy from any Git repos
   sourceRepos:
@@ -27,11 +27,3 @@ spec:
   orphanedResources:
     warn: true
 
-  roles:
-  # A role which provides read-only access to all applications in the project
-  - name: read-only
-    description: Read-only privileges to my-project
-    policies:
-    - p, proj:{{ .Release.Name }}-vault-config:read-only, applications, get, {{ .Release.Name }}-vault-config/*, allow
-    groups:
-    - hq-product
