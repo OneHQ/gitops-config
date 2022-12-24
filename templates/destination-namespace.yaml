@@ -1,0 +1,7 @@
+# TODO: to be replaced by NamespaceRequest
+kind: Namespace
+apiVersion: v1
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: {{ .Release.Name }}

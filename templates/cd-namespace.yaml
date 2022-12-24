@@ -1,0 +1,46 @@
+# TODO: to be replaced by NamespaceRequest
+kind: Namespace
+apiVersion: v1
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+  name: {{ .Release.Name }}-cd
+---
+{{- if .Values.ciRBAC.create }}
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ .Release.Name }}-ci
+  namespace: {{ .Values.mainApp.cdNamespace }}
+  labels:
+    {{- include "cd-preconfig.labels" . | nindent 4 }}
+
+subjects:
+  - kind: ServiceAccount
+    name: {{ .Values.ciRBAC.saName }}
+    namespace: {{ .Values.ciRBAC.saNamespace }}
+
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ .Release.Name }}-ci
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ .Release.Name }}-ci
+  labels:
+    {{- include "cd-preconfig.labels" . | nindent 4 }}
+rules:
+  - verbs:
+      - create
+      - update
+      - patch
+      - get
+      - list
+      - watch
+    apiGroups:
+      - argoproj.io
+    resources:
+      - applications
+{{- end }}

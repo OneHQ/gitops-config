@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ .Release.Name }}-vault-config
+  labels: {{- include "cd-preconfig.labels" . | nindent 4 }} 
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # Project description
+  description: {{ .Release.Name }}
+
+  # Allow manifests to deploy from any Git repos
+  sourceRepos:
+    - '{{ .Values.vaultConfig.repository.repoURL }}'  
+
+  # Only permit applications to deploy to the guestbook namespace in the same cluster
+  destinations:
+    - namespace: '{{ .Values.vaultConfig.destination.namespace }}'
+      name: '{{ .Values.vaultConfig.destination.name }}'
+
+  namespaceResourceWhitelist:
+  - group: 'vault.advatys.com'
+    kind: '*'
+
+  # Enables namespace orphaned resource monitoring.
+  orphanedResources:
+    warn: true
+
+  roles:
+  # A role which provides read-only access to all applications in the project
+  - name: read-only
+    description: Read-only privileges to my-project
+    policies:
+    - p, proj:{{ .Release.Name }}-vault-config:read-only, applications, get, {{ .Release.Name }}-vault-config/*, allow
+    groups:
+    - hq-product

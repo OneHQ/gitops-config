@@ -1,0 +1,20 @@
+{{- if .Values.vaultConfig.config }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Release.Name }}-vault-config
+  labels: {{- include "cd-preconfig.labels" . | nindent 4 }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ .Release.Name }}
+  source: {{ toYaml .Values.vaultConfig.repository | nindent 4 }}
+
+    helm:
+      values: |- 
+        {{ toYaml .Values.vaultConfig.config | indent 8 }}
+        
+
+  destination: {{ toYaml .Values.vaultConfig.destination | nindent 4}}
+  syncPolicy: {{ toYaml .Values.syncPolicy | nindent 4}}
+{{- end }}

@@ -1,0 +1,30 @@
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+  - ApplyOutOfSyncOnly=true
+
+mainApp:
+  # Continuous deployment namespace. This is where main ArgoCD Application
+  cdNamespace: ""
+
+  # Destinations (clusters and namespaces) where IAMHQ will be deployed
+  destinations: []
+  #  - clusterName:
+  #    namespace: 
+
+vaultConfig:
+  destination:
+    name: hub
+    namespace: vault
+  repository:
+    repoURL: 'https://github.com/advatys/vaultaas.git'
+    path: vault-config
+    targetRevision: main
+  config: {}
+
+ciRBAC:
+  create: true
+  serviceAccountName: ""
+  serviceAccountNamespace: ""
