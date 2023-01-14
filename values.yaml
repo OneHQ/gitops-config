@@ -10,9 +10,9 @@ mainApp:
   destinations:
    - name: hub
 
-  repositories:
+  sourceRepos:
     - '*'
-    
+
 vaultConfig:
   destination:
     name: hub

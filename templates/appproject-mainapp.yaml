@@ -16,7 +16,7 @@ spec:
 
   # Allowed repositories
 
-  repositories:
+  sourceRepos:
     {{- range .Values.mainApp.repositories }}
     - '{{ . }}'
     {{- end }}
