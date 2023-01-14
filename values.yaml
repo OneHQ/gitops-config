@@ -10,7 +10,9 @@ mainApp:
   destinations:
    - name: hub
 
-
+  repositories:
+    - '*'
+    
 vaultConfig:
   destination:
     name: hub
@@ -20,6 +22,7 @@ vaultConfig:
     path: vault-config
     targetRevision: main
   config: {}
+
 
 ciPipelineRBAC:
   create: true
