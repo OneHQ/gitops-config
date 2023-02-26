@@ -18,7 +18,7 @@ vaultConfig:
     name: hub
     namespace: vault
   repository:
-    repoURL: 'https://github.com/advatys/vaultaas.git'
+    repoURL: 'git@github.com:advatys/vaultaas.git'
     path: vault-config
     targetRevision: main
   config: {}
