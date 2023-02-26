@@ -24,6 +24,12 @@ spec:
   namespaceResourceWhitelist:
   - group: 'vault.advatys.com'
     kind: '*'
+  - group: 'redhatcop.redhat.io'
+    kind: 'JWTOIDCAuthEngineRole'
+  - group: 'redhatcop.redhat.io'
+    kind: 'Policy'
+  - group: 'redhatcop.redhat.io'
+    kind: 'SecretEngineMount'
 
   # Enables namespace orphaned resource monitoring.
   orphanedResources:
