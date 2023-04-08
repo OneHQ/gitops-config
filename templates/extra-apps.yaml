@@ -1,0 +1,21 @@
+{{- range .Values.extraApps }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $.Values.instanceName }}-{{ .name }}
+  labels: {{- include "cd-preconfig.labels" . | nindent 4 }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: {{ $.Values.instanceName }}-{{ .name }}
+  source: {{ toYaml .repository | nindent 4 }}
+
+    helm:
+      values: |- 
+        {{ tpl (toYaml .config) . | nindent 8 }}
+        
+
+  destination: {{ toYaml .destination | nindent 4}}
+  syncPolicy: {{ toYaml $.Values.syncPolicy | nindent 4}}
+---
+{{- end }}

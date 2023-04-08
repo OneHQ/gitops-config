@@ -35,6 +35,7 @@ vaultConfig:
     targetRevision: main
   config: {}
 
+extraApps: []
 
 ciPipelineRBAC:
   create: true
