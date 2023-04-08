@@ -30,7 +30,8 @@ spec:
     kind: 'Policy'
   - group: 'redhatcop.redhat.io'
     kind: 'SecretEngineMount'
-
+  - group: 'redhatcop.redhat.io'
+    kind: 'KubernetesAuthEngineRole'
   # Enables namespace orphaned resource monitoring.
   orphanedResources:
     warn: true

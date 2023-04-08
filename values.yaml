@@ -6,12 +6,24 @@ syncPolicy:
   syncOptions:
   - ApplyOutOfSyncOnly=true
 
+
 mainApp:
   destinations:
    - name: hub
 
   sourceRepos:
     - '*'
+
+grafanaDashboards:
+  destination:
+    name: hub
+    namespace: grafana
+  repository:
+    repoURL: 'https://github.com/advatys/grafana.git'
+    path: grafana-dashboards
+    targetRevision: main
+  config:
+    dashboards: []
 
 vaultConfig:
   destination:
