@@ -1,18 +1,21 @@
-instanceName: ""
-syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
-  syncOptions:
-  - ApplyOutOfSyncOnly=true
+namespaceRequests: []
+  # - name: vault
+  #   rbac:
+  #    - role:
+  #        name: vault
+  #        kind: Role
+  #        rules: []
+  #      roleBinding:
+  #        name: vault
+  #        subjects:
+  #          - kind: ServiceAccount
+  #            name: vault
+
+  #   memory: 256Mi
+  # - name: grafana
+  #   cpu: 100m
 
 
-mainApp:
-  destinations:
-   - name: hub
-
-  sourceRepos:
-    - '*'
 
 grafanaDashboards:
   destination:
@@ -35,7 +38,9 @@ vaultConfig:
     targetRevision: main
   config: {}
 
-extraApps: []
-
-ciPipelineRBAC:
-  create: true
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true
+  syncOptions:
+  - ApplyOutOfSyncOnly=true

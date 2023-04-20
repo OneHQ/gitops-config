@@ -1,0 +1,24 @@
+namespaceRequests:
+  - name: grafana-operator
+
+argocd-resources:
+  applications:
+    - name: grafana-operator
+      namespace: argocd
+      project: default
+      destination:
+        name: hub
+        namespace: grafana-operator
+      source:
+        chart: grafana-operator
+        repoURL: https://charts.bitnami.com/bitnami 
+        targetRevision: 2.7.24
+        helm:
+          releaseName: grafana-operator
+          values: |
+            replicaCount: 1
+            scanAllNamespaces: true
+            containerSecurityContext:
+              enabled: false
+            podSecurityContext:
+              enabled:  false

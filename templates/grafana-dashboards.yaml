@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ .Values.instanceName }}-grafana-dashboards
-  labels: {{- include "cd-preconfig.labels" . | nindent 4 }}
+  labels: {{- include "gitops-config.labels" . | nindent 4 }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
