@@ -2,12 +2,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.instanceName }}-grafana-dashboards
+  name: {{ .Release.Name }}-grafana-dashboards
   labels: {{- include "gitops-config.labels" . | nindent 4 }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: {{ .Values.instanceName }}-grafana-dashboards
+  project: {{ .Release.Name }}-grafana-dashboards
   source: {{ toYaml .Values.grafanaDashboards.repository | nindent 4 }}
 
     helm:

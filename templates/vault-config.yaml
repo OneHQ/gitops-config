@@ -2,12 +2,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.instanceName }}-vault-config
+  name: {{ .Release.Name }}-vault-config
   labels: {{- include "gitops-config.labels" . | nindent 4 }}
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  project: {{ .Values.instanceName }}-vault-config
+  project: {{ .Release.Name }}-vault-config
   source: {{ toYaml .Values.vaultConfig.repository | nindent 4 }}
 
     helm:
