@@ -9,7 +9,7 @@ metadata:
 spec:
   project: {{ .Values.vaultConfig.project }}
   source: {{ toYaml .Values.vaultConfig.repository | nindent 4 }}
-
+  
     helm:
       values: |- 
         {{ tpl (toYaml .Values.vaultConfig.config) . | nindent 8 }}

@@ -1,0 +1,19 @@
+{{- if .Values.argocdApps }}
+{{- range $app := .Values.argocdApps }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ tpl .name $ }}
+  labels: {{- include "gitops-config.labels" $ | nindent 4 }}
+  {{- if .finalizers }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  {{- end }}
+spec:
+  project: {{ tpl .project $ }}
+  source: {{ tpl (toYaml .source) $ | nindent 4 }}      
+
+  destination: {{tpl (toYaml .destination) $ | nindent 4}}
+  syncPolicy: {{ toYaml $.Values.syncPolicy | nindent 4}}
+{{- end }}
+{{- end }}
