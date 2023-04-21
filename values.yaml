@@ -17,7 +17,7 @@ namespaceRequests: []
 
 
 
-grafanaDashboards:
+grafana:
   destination:
     name: hub
     namespace: grafana
@@ -27,6 +27,8 @@ grafanaDashboards:
     targetRevision: main
   config:
     dashboards: []
+    folders: []
+    datasources: []
 
 vaultConfig:
   destination:
