@@ -14,5 +14,6 @@ spec:
   source: {{ (tpl .source $) | nindent 4 }}
   destination: {{tpl (toYaml .destination) $ | nindent 4}}
   syncPolicy: {{ toYaml $.Values.syncPolicy | nindent 4}}
+---
 {{- end }}
 {{- end }}

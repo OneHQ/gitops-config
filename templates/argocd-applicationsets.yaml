@@ -1,0 +1,14 @@
+{{- with .Values.argocdApplicationSets }}
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: {{ tpl .name $ }}
+  labels: {{- include "gitops-config.labels" $ | nindent 4 }}
+spec:
+  generators: {{ tpl .generators $ }}
+  template: {{ (tpl .template $) | nindent 4 }}
+  requeueAfterSeconds: {{ .requeueAfterSeconds | default 300 }}
+  goTemplate: {{ .goTemplate | default false }}
+  syncPolicy:
+    preserveResourcesOnDeletion: {{ .preserveResourcesOnDeletion | default true }}
+{{- end }}
