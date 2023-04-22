@@ -1,4 +1,4 @@
-{{- with .Values.argocdApplicationSets }}
+{{- range .Values.argocdApplicationSets }}
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -11,4 +11,5 @@ spec:
   goTemplate: {{ .goTemplate | default false }}
   syncPolicy:
     preserveResourcesOnDeletion: {{ .preserveResourcesOnDeletion | default true }}
+---
 {{- end }}

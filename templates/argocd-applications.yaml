@@ -1,4 +1,3 @@
-{{- if .Values.argocdApps }}
 {{- range $app := .Values.argocdApps }}
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -15,5 +14,4 @@ spec:
   destination: {{tpl (toYaml .destination) $ | nindent 4}}
   syncPolicy: {{ toYaml $.Values.syncPolicy | nindent 4}}
 ---
-{{- end }}
 {{- end }}
