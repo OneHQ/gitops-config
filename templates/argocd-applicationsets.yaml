@@ -5,8 +5,8 @@ metadata:
   name: {{ tpl .name $ }}
   labels: {{- include "gitops-config.labels" $ | nindent 4 }}
 spec:
-  generators: {{ tpl .generators $ }}
-  template: {{ (tpl .template $) | nindent 4 }}
+  generators: {{ (tpl (toYaml .generators) $) | nindent 4 }}
+  template: {{ (tpl (toYaml .template) $) | nindent 4 }}
   requeueAfterSeconds: {{ .requeueAfterSeconds | default 300 }}
   goTemplate: {{ .goTemplate | default false }}
   syncPolicy:
