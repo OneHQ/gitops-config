@@ -7,7 +7,6 @@ metadata:
 spec:
   generators: {{ (tpl (toYaml .generators) $) | nindent 4 }}
   template: {{ (tpl (toYaml .template) $) | nindent 4 }}
-  requeueAfterSeconds: {{ .requeueAfterSeconds | default 300 }}
   goTemplate: {{ .goTemplate | default false }}
   syncPolicy:
     preserveResourcesOnDeletion: {{ .preserveResourcesOnDeletion | default true }}
