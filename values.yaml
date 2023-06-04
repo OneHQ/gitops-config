@@ -42,8 +42,5 @@ vaultConfig:
   config: {}
 
 syncPolicy:
-  automated:
-    prune: true
-    selfHeal: true
   syncOptions:
   - ApplyOutOfSyncOnly=true
