@@ -19,7 +19,7 @@ grafanaDashboards:
     name: hub
     namespace: grafana
   repository:
-    repoURL: 'https://github.com/advatys/grafana.git'
+    repoURL: 'https://github.com/onehq/grafana.git'
     path: grafana-dashboards
     targetRevision: main
   config:
@@ -30,7 +30,7 @@ vaultConfig:
     name: hub
     namespace: vault
   repository:
-    repoURL: 'git@github.com:advatys/vaultaas.git'
+    repoURL: 'https://github.com/onehq/vaultaas.git'
     path: vault-config
     targetRevision: main
   config: {}
